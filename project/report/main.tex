@@ -1,0 +1,63 @@
+\documentclass[12pt]{ftec2101} 
+% This template is modified from COLT 2020
+
+% The following packages will be automatically loaded:
+% amsmath, amssymb, natbib, graphicx, url, algorithm2e
+
+\title[Short Title]{ESTR2520 Course Project: Portfolio Optimization in Practice}
+\usepackage{times}
+\usepackage{amsmath}
+% Use \Name{Author Name} to specify the name.
+% If the surname contains spaces, enclose the surname
+% in braces, e.g. \Name{John {Smith Jones}} similarly
+% if the name has a "von" part, e.g \Name{Jane {de Winter}}.
+% If the first letter in the forenames is a diacritic
+% enclose the diacritic in braces, e.g. \Name{{\'E}louise Smith}
+
+% Two authors with the same address
+% \coltauthor{\Name{Author Name1} \Email{abc@sample.com}\and
+%  \Name{Author Name2} \Email{xyz@sample.com}\\
+%  \addr Address}
+
+% Three or more authors with the same address:
+% \coltauthor{\Name{Author Name1} \Email{an1@sample.com}\\
+%  \Name{Author Name2} \Email{an2@sample.com}\\
+%  \Name{Author Name3} \Email{an3@sample.com}\\
+%  \addr Address}
+\newcommand{\matr}[1]{\mathbf{#1}}
+\newcommand{\vect}[1]{\mathbf{#1}}
+% Authors with different addresses:
+\coltauthor{%
+ \Name{HU, Han} \Email{hanhu@link.cuhk.edu.hk}\\
+ \addr Department of Information Engineering, CUHK
+% \AND
+% \Name{Author Name2} \Email{xyz@sample.com}\\ % uncomment this if you are working in a group of 2
+% \addr Address 2%
+}
+
+\begin{document}
+
+\maketitle
+
+
+\section{Introduction}
+
+This is where the content of your paper goes.
+
+\section{Task 1}
+Derivation of the KKT conditions for the (simplified) Markowitz's mean-variance Portfolio Optimization problem stated in formula (1.1) in project specfication is:
+\begin{align}
+    L(p,\lambda) = \frac{1}{2}\vect{p}^T\matr{\Sigma} \vect{p} + \lambda_{1} (\vect{1}^T \vect{p}-B) +\lambda_{2} (\hat{\vect{r}}^T \vect{p}-R_{d})\ ,
+\end{align}
+where $B$ is the fixed budget, $R_d$ is the fixed desired return and $\vect{1}$ is an all-one vector according to the project specfication.
+% It is a good habit to organize your reference in a bibliography (.bib) file. 
+\bibliography{estr_bib}
+
+\appendix
+
+\section{My Proof of Theorem 1}
+
+This is a boring technical proof.
+ 
+
+\end{document}
