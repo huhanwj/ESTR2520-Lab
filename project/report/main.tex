@@ -4,9 +4,10 @@
 % The following packages will be automatically loaded:
 % amsmath, amssymb, natbib, graphicx, url, algorithm2e
 
-\title[Short Title]{ESTR2520 Course Project: Portfolio Optimization in Practice}
+\title{FTEC Course Project: Portfolio Optimization in Practice}
 \usepackage{times}
 \usepackage{amsmath}
+\usepackage{hyperref}
 % Use \Name{Author Name} to specify the name.
 % If the surname contains spaces, enclose the surname
 % in braces, e.g. \Name{John {Smith Jones}} similarly
@@ -45,11 +46,74 @@
 This is where the content of your paper goes.
 
 \section{Task 1}
+\subsection{Subquestion (a)}
 Derivation of the KKT conditions for the (simplified) Markowitz's mean-variance Portfolio Optimization problem stated in formula (1.1) in project specfication is:
 \begin{align}
-    L(p,\lambda) = \frac{1}{2}\vect{p}^T\matr{\Sigma} \vect{p} + \lambda_{1} (\vect{1}^T \vect{p}-B) +\lambda_{2} (\hat{\vect{r}}^T \vect{p}-R_{d})\ ,
+    L(p,\vect{\lambda}) = \frac{1}{2}\vect{p}^T\matr{\Sigma} \vect{p} + \lambda_{1} (\vect{1}^T \vect{p}-B) +\lambda_{2} (\bar{\vect{r}}^T \vect{p}-R_{d})\ ,
 \end{align}
 where $B$ is the fixed budget, $R_d$ is the fixed desired return and $\vect{1}$ is an all-one vector according to the project specfication.
+
+\noindent
+For the corvariance matrix, we have $\matr{\Sigma}^T = \matr{\Sigma}$. Then $\nabla \left(\frac{1}{2}\vect{p}^T \matr{\Sigma} \vect{p}\right) = \frac{1}{2}(\matr{\Sigma}\vect{p}+\matr{\Sigma}^T \vect{p}) = \matr{\Sigma}\vect{p}$. 
+
+\noindent
+Solving the KKT condition, we have
+\begin{align}
+    \begin{cases}
+        \nabla_{p} L(p,\vect{\lambda}) = 0 \\
+        \nabla_{\lambda} L(p,\vect{\lambda}) = 0
+    \end{cases}
+    \implies
+    \begin{cases}
+        \matr{\Sigma}\vect{p}+\lambda_1 \vect{1} + \lambda_2 \bar{\vect{r}} = 0 \\
+        \vect{1}^T \vect{p} - B = 0 \\
+        \bar{\vect{r}}^T \vect{p} - R_d = 0
+    \end{cases}
+    \label{KKT:1}
+\end{align}
+
+\noindent
+From the task specfication, we know that the optimal $\vect{p}^{*}$ is given as
+\begin{align}
+    \vect{p}^{*} = \frac{\matr{\Sigma}^{-1}\{(r_0 B-r_1 R_d)\vect{1}+(r_2 R_d- r_1 B)\bar{\vect{r}}\}}{r_0 r_2 - r_1^2} \ ,
+    \label{p:optimal}
+\end{align}
+where $r_0 = \bar{\vect{r}}^T \matr{\Sigma}^{-1} \bar{\vect{r}}$, $r_1 = \vect{1}^T \matr{\Sigma}^{-1} \bar{\vect{r}}$, $r_2 = \vect{1}^T \matr{\Sigma}^{-1} \vect{1}$.
+
+\noindent
+By plugging (\ref{p:optimal}) into the three equations in (\ref{KKT:1}), we get
+\begin{align}
+    \matr{\Sigma} \vect{p}^{*} +\lambda_1 \vect{1} + \lambda_2 \bar{\vect{r}}&= \frac{\matr{\Sigma}\matr{\Sigma}^{-1}\{(r_0 B - r_1 R_d)\vect{1}+(r_2 R_d - r_1 B)\bar{\vect{r}}\}}{r_0 r_2 -r_1^2} + \lambda_1 \vect{1} + \lambda_2 \bar{\vect{r}} \\
+    &= \frac{r_0 B-r_1 R_d}{r_0 r_2 -r_1^2}\vect{1}+\frac{r_2 R_d - r_1 B}{r_0 r_2 -r_1^2}\bar{\vect{r}} + \lambda_1 \vect{1} +\lambda_2 \bar{\vect{r}}\ .
+    \label{KKT:in:1}
+\end{align}
+\begin{align}
+    \vect{1}^T \vect{p}^{*} - B &= \frac{\vect{1}^T\matr{\Sigma}^{-1}\{(r_0 B-r_1 R_d)\vect{1}+(r_2 R_d - r_1 B)\bar{\vect{r}}\}}{r_0 r_2 - r_1^2}- B \\
+    & = \frac{\vect{1}^T\matr{\Sigma}^{-1}r_0 B \vect{1}-\vect{1}^T\matr{\Sigma}^{-1}r_1 R_d \vect{1}+\vect{1}^T\matr{\Sigma}^{-1}r_2 R_d \bar{\vect{r}}-\vect{1}^T \matr{\Sigma}^{-1} r_1 B \bar{\vect{r}}}{r_0 r_2 -r_1^2} - B \\
+    & = \frac{r_2 r_0 B - r_2 r_1 R_d + r_1 r_2 R_d -r_1^2 B}{r_0 r_2 -r_1^2} - B \\
+    & = B - B \\
+    & = 0
+    \label{KKT:in:2}
+\end{align}
+\begin{align}
+    \bar{\vect{r}}^T \vect{p}^{*} -R_d &= \frac{\bar{\vect{r}}^T\matr{\Sigma}^{-1}\{(r_0 B-r_1 R_d)\vect{1}+(r_2 R_d - r_1 B)\bar{\vect{r}}\}}{r_0 r_2 - r_1^2}- R_d \\
+    &= \frac{\bar{\vect{r}}^T\matr{\Sigma}^{-1}r_0 B \vect{1}-\bar{\vect{r}}^T\matr{\Sigma}^{-1}r_1 R_d \vect{1}+\bar{\vect{r}}^T\matr{\Sigma}^{-1}r_2 R_d \bar{\vect{r}}-\bar{\vect{r}}^T \matr{\Sigma}^{-1} r_1 B \bar{\vect{r}}}{r_0 r_2 -r_1^2} - R_d \ .
+    \label{KKT:in:3:half}
+\end{align}
+Here we first calculate $\bar{\vect{r}}^T \matr{\Sigma}^{-1} \vect{1}$,
+\begin{align}
+    (\bar{\vect{r}}^T \matr{\Sigma}^{-1} \vect{1})^T = (\matr{\Sigma}^{-1} \vect{1})^T \bar{\vect{r}} = \vect{1} \matr{\Sigma}^{-1} \bar{\vect{r}} = r_1 \ .
+    \label{KKT:in:3:com}
+\end{align}
+Combing (\ref{KKT:in:3:half}) and (\ref{KKT:in:3:com}), we obtain
+\begin{align}
+    \bar{\vect{r}}^T \vect{p}^{*} -R_d &= \frac{r_1 r_0 B - r_1^2 R_d + r_0 r_2 R_d - r_0 r_1 B}{r_0 r_2 - r_1^2} - R_d \\
+    &= R_d - R_d \\ 
+    &= 0
+    \label{KKT:in:3}
+\end{align}
+\noindent
+From (\ref{KKT:in:1}), (\ref{KKT:in:2}) and (\ref{KKT:in:3}), by choosing $\lambda_1 = \frac{r_1 R_d}{r_0 r_2 -r_1^2}$, $\lambda_2 = \frac{r_1 B - r_2 R_d}{r_0 r_2 -r_1^2}$, all three equations equal to $0$ and $\vect{p}^{*}$ is proven to be a valid optimal solution for (1.1).
 % It is a good habit to organize your reference in a bibliography (.bib) file. 
 \bibliography{estr_bib}
 
