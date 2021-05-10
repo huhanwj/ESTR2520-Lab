@@ -8,6 +8,7 @@
 \usepackage{times}
 \usepackage{amsmath}
 \usepackage{hyperref}
+\usepackage{enumitem}
 % Use \Name{Author Name} to specify the name.
 % If the surname contains spaces, enclose the surname
 % in braces, e.g. \Name{John {Smith Jones}} similarly
@@ -113,7 +114,46 @@ Combing (\ref{KKT:in:3:half}) and (\ref{KKT:in:3:com}), we obtain
     \label{KKT:in:3}
 \end{align}
 \noindent
-From (\ref{KKT:in:1}), (\ref{KKT:in:2}) and (\ref{KKT:in:3}), by choosing $\lambda_1 = \frac{r_1 R_d}{r_0 r_2 -r_1^2}$, $\lambda_2 = \frac{r_1 B - r_2 R_d}{r_0 r_2 -r_1^2}$, all three equations equal to $0$ and $\vect{p}^{*}$ is proven to be a valid optimal solution for (1.1).
+From (\ref{KKT:in:1}), (\ref{KKT:in:2}) and (\ref{KKT:in:3}), by choosing $\lambda_1 = \frac{r_1 R_d- r_0 B}{r_0 r_2 -r_1^2}$, $\lambda_2 = \frac{r_1 B - r_2 R_d}{r_0 r_2 -r_1^2}$, all three equations equal to $0$ and $\vect{p}^{*}$ is proven to be a valid optimal solution for (1.1).
+\subsection{Subquestion (b)}
+From the simplified conditions given in the specfication and calculations based on the additional conditions, we have 
+\begin{align*}
+    \bar{\vect{r}} =
+    \begin{pmatrix}
+        \bar{r}_1 \\
+        1
+    \end{pmatrix}\ ,
+    r_0 = \bar{r}_1^2+1\ ,
+    r_1 = \bar{r}_1 + 1\ , 
+    r_2 = 2\ ,
+    \matr{\Sigma} = \matr{\Sigma}^{-1} =
+    \begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{pmatrix}
+\end{align*}
+
+\noindent
+Plug the above additional conditions into the given $\vect{p}^{*}$ given in subsection (a), we get
+\begin{align}
+    \vect{p}^{*} &= \frac{\matr{\Sigma}^{-1}\{[(\bar{r}_1^2+1)B-(\bar{r}_1+1)R_d]\vect{1}+[2R_d - (\bar{r}_1 + 1)B]\bar{\vect{r}}\}}{2\bar{r}_1^2 + 2 - (\bar{r}_1+1)^2} \\
+    &= \frac{1}{\bar{r}_1 - 1} \cdot
+    \begin{pmatrix}
+        R_d - B \\
+        B\bar{r}_1 - R_d
+    \end{pmatrix}\\
+    &=
+    \begin{pmatrix}
+        \frac{R_d-B}{\bar{r}_1 - 1} \\
+        B+ \frac{B-R_d}{\bar{r}_1 - 1}
+    \end{pmatrix}\ .
+    \label{optimal:p}
+\end{align}
+By observing (\ref{optimal:p}), we can conclude that
+\begin{enumerate}
+    \item If $\bar{r}_1$ increases, since $R_d > B$, $p_1^{*}$ will decrease, $p_2^{*}$ will increase.
+    \item If $R_d$ increases, $p_1^{*}$ will increase, $p_2^{*}$ will decrease.
+\end{enumerate}
 % It is a good habit to organize your reference in a bibliography (.bib) file. 
 \bibliography{estr_bib}
 
