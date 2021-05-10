@@ -170,7 +170,7 @@ The mixed integer program formed is
 \end{gather}
 \section{Task 3}
 \subsection{Subquestion (a)}
-We first define a new vect $\vect{x'}$ as
+We first define a new vector $\vect{x'}$ as
 \begin{align*}
     \vect{x'} = 
     \begin{pmatrix}
@@ -196,7 +196,7 @@ The nonlinear program formed is
                         \sum_{i=1}^{n} (x_i + a x_i^2) \leq B \\
                         t \geq \sqrt{(\vect{x}+\boldsymbol{\omega})^T \boldsymbol{\Sigma} (\vect{x}+\boldsymbol{\omega})} \\
                         -M \leq x'_i \leq M,\ i=2,\cdots,n+1 \\
-                        x'_i \geq - \omega_i - 1,\ i=2,\cdots,n+1
+                        x'_i \geq - \omega_{i - 1},\ i=2,\cdots,n+1
 \end{aligned}
 \label{nonlinear:constraint}
 \end{gather}
@@ -217,7 +217,13 @@ To write the nonlinear program as an SOCP, we need to modify the constraints in 
 \end{align}
 \begin{align}
     \sum_{i=1}^{n} (x_i + a x_i^2) \leq B &\implies \sum_{i=1}^{n} \left(x_i + a x_i^2+\frac{1}{4a}\right) \leq B+\frac{n}{4a} \\
-    &\implies \left \Vert \sqrt{a} \vect{x} + \frac{1}{2\sqrt{a}} \vect{1}\right \Vert \leq \sqrt{B+\frac{n}{4a}}
+    &\implies \left \Vert \sqrt{a} \vect{x} + \frac{1}{2\sqrt{a}} \vect{1}\right \Vert \leq \sqrt{B+\frac{n}{4a}} \\
+    &\implies \left \Vert 
+    \begin{pmatrix}
+        0 & \\
+        \vdots & \sqrt{a} \matr{I} \\
+        0 & 
+    \end{pmatrix}\vect{x'} + \frac{1}{2\sqrt{a}} \cdot \vect{1} \right \Vert \leq 0 \cdot \vect{x'} + \sqrt{B+\frac{n}{4a}}
 \end{align}
 \begin{align}
     t \geq \sqrt{(\vect{x}+\boldsymbol{\omega})^T \boldsymbol{\Sigma} (\vect{x}+\boldsymbol{\omega})} &\implies \left \Vert \boldsymbol{\Sigma}^{\frac{1}{2}} \vect{x} + \boldsymbol{\Sigma}^{\frac{1}{2}}\boldsymbol{\omega}\right \Vert \leq t \\
@@ -255,7 +261,12 @@ Thus, the formed SOCP is
         0\\
         \bar{\vect{r}}
     \end{pmatrix}^T \vect{x'} + \bar{\vect{r}}^T \boldsymbol{\omega}\\
-    \left \Vert \sqrt{a} \vect{x} + \frac{1}{2\sqrt{a}} \vect{1}\right \Vert \leq \sqrt{B+\frac{n}{4a}}\\
+    \left \Vert 
+    \begin{pmatrix}
+        0 & \\
+        \vdots & \sqrt{a} \matr{I} \\
+        0 & 
+    \end{pmatrix}\vect{x'} + \frac{1}{2\sqrt{a}} \cdot \vect{1} \right \Vert \leq 0 \cdot \vect{x'} + \sqrt{B+\frac{n}{4a}}\\
     \left \Vert
     \begin{pmatrix}
         0 & \\
@@ -269,7 +280,7 @@ Thus, the formed SOCP is
         0
     \end{pmatrix}^T \vect{x'}\\
     -M \leq x'_i \leq M,\ i=2,\cdots,n+1 \\
-    x'_i \geq - \omega_i - 1,\ i=2,\cdots,n+1
+    x'_i \geq - \omega_{i - 1},\ i=2,\cdots,n+1
     \end{aligned}
 \end{gather}
 % It is a good habit to organize your reference in a bibliography (.bib) file. 
