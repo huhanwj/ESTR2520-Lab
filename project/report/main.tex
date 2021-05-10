@@ -50,7 +50,7 @@ This is where the content of your paper goes.
 \subsection{Subquestion (a)}
 Derivation of the KKT conditions for the (simplified) Markowitz's mean-variance Portfolio Optimization problem stated in formula (1.1) in project specfication is:
 \begin{align}
-    L(p,\vect{\lambda}) = \frac{1}{2}\vect{p}^T\matr{\Sigma} \vect{p} + \lambda_{1} (\vect{1}^T \vect{p}-B) +\lambda_{2} (\bar{\vect{r}}^T \vect{p}-R_{d})\ ,
+    L(p,\boldsymbol{\lambda}) = \frac{1}{2}\vect{p}^T\matr{\Sigma} \vect{p} + \lambda_{1} (\vect{1}^T \vect{p}-B) +\lambda_{2} (\bar{\vect{r}}^T \vect{p}-R_{d})\ ,
 \end{align}
 where $B$ is the fixed budget, $R_d$ is the fixed desired return and $\vect{1}$ is an all-one vector according to the project specfication.
 
@@ -61,8 +61,8 @@ For the corvariance matrix, we have $\matr{\Sigma}^T = \matr{\Sigma}$. Then $\na
 Solving the KKT condition, we have
 \begin{align}
     \begin{cases}
-        \nabla_{p} L(p,\vect{\lambda}) = 0 \\
-        \nabla_{\lambda} L(p,\vect{\lambda}) = 0
+        \nabla_{p} L(p,\boldsymbol{\lambda}) = 0 \\
+        \nabla_{\lambda} L(p,\boldsymbol{\lambda}) = 0
     \end{cases}
     \implies
     \begin{cases}
@@ -154,6 +154,20 @@ By observing (\ref{optimal:p}), we can conclude that
     \item If $\bar{r}_1$ increases, since $R_d > B$, $p_1^{*}$ will decrease, $p_2^{*}$ will increase.
     \item If $R_d$ increases, $p_1^{*}$ will increase, $p_2^{*}$ will decrease.
 \end{enumerate}
+
+\section{Task 2}
+The mixed integer question formed is
+\begin{gather}
+    \min_{\vect{x}\in\mathbb{R}^n ,\  \vect{y}\in \mathbb{Z}^n} \quad (\vect{x}+\boldsymbol{\omega})^T \matr{\Sigma} (\vect{x}+\boldsymbol{\omega}) \\
+    \label{mix:integer}
+    \begin{aligned}
+    \textup{s.t.} \quad \sum_{i=1}^{n} (x_i+\omega_i)\bar{r}_i \geq R_d\\
+                \sum_{i=1}^{n} (x_i+y_i c) \leq B\\
+                -M y_i \leq x_i \leq M y_i,\ i=1,\cdots,n\\
+                x_i \geq -\omega_i,\ i = 1,\cdots,n\\
+                y_i \in \{0,1\},\ i = 1,\cdots,n
+\end{aligned}
+\end{gather}
 % It is a good habit to organize your reference in a bibliography (.bib) file. 
 \bibliography{estr_bib}
 
