@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{colt2020}[2020/02/01 v1.0 COLT 2019 Proceedings]
+\ProvidesClass{ftec2101}[2020/02/01 v1.0 COLT 2019 Proceedings]
 \newcommand{\todo}{\color{red}}
 
 \@ifundefined{ifanonsubmission}{
