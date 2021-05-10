@@ -50,12 +50,12 @@ This is where the content of your paper goes.
 \subsection{Subquestion (a)}
 Derivation of the KKT conditions for the (simplified) Markowitz's mean-variance Portfolio Optimization problem stated in formula (1.1) in project specfication is:
 \begin{align}
-    L(p,\boldsymbol{\lambda}) = \frac{1}{2}\vect{p}^T\matr{\Sigma} \vect{p} + \lambda_{1} (\vect{1}^T \vect{p}-B) +\lambda_{2} (\bar{\vect{r}}^T \vect{p}-R_{d})\ ,
+    L(p,\boldsymbol{\lambda}) = \frac{1}{2}\vect{p}^T\boldsymbol{\Sigma} \vect{p} + \lambda_{1} (\vect{1}^T \vect{p}-B) +\lambda_{2} (\bar{\vect{r}}^T \vect{p}-R_{d})\ ,
 \end{align}
 where $B$ is the fixed budget, $R_d$ is the fixed desired return and $\vect{1}$ is an all-one vector according to the project specfication.
 
 \noindent
-For the corvariance matrix, we have $\matr{\Sigma}^T = \matr{\Sigma}$. Then $\nabla \left(\frac{1}{2}\vect{p}^T \matr{\Sigma} \vect{p}\right) = \frac{1}{2}(\matr{\Sigma}\vect{p}+\matr{\Sigma}^T \vect{p}) = \matr{\Sigma}\vect{p}$. 
+For the corvariance matrix, we have $\boldsymbol{\Sigma}^T = \boldsymbol{\Sigma}$. Then $\nabla \left(\frac{1}{2}\vect{p}^T \boldsymbol{\Sigma} \vect{p}\right) = \frac{1}{2}(\boldsymbol{\Sigma}\vect{p}+\boldsymbol{\Sigma}^T \vect{p}) = \boldsymbol{\Sigma}\vect{p}$. 
 
 \noindent
 Solving the KKT condition, we have
@@ -66,7 +66,7 @@ Solving the KKT condition, we have
     \end{cases}
     \implies
     \begin{cases}
-        \matr{\Sigma}\vect{p}+\lambda_1 \vect{1} + \lambda_2 \bar{\vect{r}} = 0 \\
+        \boldsymbol{\Sigma}\vect{p}+\lambda_1 \vect{1} + \lambda_2 \bar{\vect{r}} = 0 \\
         \vect{1}^T \vect{p} - B = 0 \\
         \bar{\vect{r}}^T \vect{p} - R_d = 0
     \end{cases}
@@ -76,34 +76,34 @@ Solving the KKT condition, we have
 \noindent
 From the task specfication, we know that the optimal $\vect{p}^{*}$ is given as
 \begin{align}
-    \vect{p}^{*} = \frac{\matr{\Sigma}^{-1}\{(r_0 B-r_1 R_d)\vect{1}+(r_2 R_d- r_1 B)\bar{\vect{r}}\}}{r_0 r_2 - r_1^2} \ ,
+    \vect{p}^{*} = \frac{\boldsymbol{\Sigma}^{-1}\{(r_0 B-r_1 R_d)\vect{1}+(r_2 R_d- r_1 B)\bar{\vect{r}}\}}{r_0 r_2 - r_1^2} \ ,
     \label{p:optimal}
 \end{align}
-where $r_0 = \bar{\vect{r}}^T \matr{\Sigma}^{-1} \bar{\vect{r}}$, $r_1 = \vect{1}^T \matr{\Sigma}^{-1} \bar{\vect{r}}$, $r_2 = \vect{1}^T \matr{\Sigma}^{-1} \vect{1}$.
+where $r_0 = \bar{\vect{r}}^T \boldsymbol{\Sigma}^{-1} \bar{\vect{r}}$, $r_1 = \vect{1}^T \boldsymbol{\Sigma}^{-1} \bar{\vect{r}}$, $r_2 = \vect{1}^T \boldsymbol{\Sigma}^{-1} \vect{1}$.
 
 \noindent
 By plugging (\ref{p:optimal}) into the three equations in (\ref{KKT:1}), we get
 \begin{align}
-    \matr{\Sigma} \vect{p}^{*} +\lambda_1 \vect{1} + \lambda_2 \bar{\vect{r}}&= \frac{\matr{\Sigma}\matr{\Sigma}^{-1}\{(r_0 B - r_1 R_d)\vect{1}+(r_2 R_d - r_1 B)\bar{\vect{r}}\}}{r_0 r_2 -r_1^2} + \lambda_1 \vect{1} + \lambda_2 \bar{\vect{r}} \\
+    \boldsymbol{\Sigma} \vect{p}^{*} +\lambda_1 \vect{1} + \lambda_2 \bar{\vect{r}}&= \frac{\boldsymbol{\Sigma}\boldsymbol{\Sigma}^{-1}\{(r_0 B - r_1 R_d)\vect{1}+(r_2 R_d - r_1 B)\bar{\vect{r}}\}}{r_0 r_2 -r_1^2} + \lambda_1 \vect{1} + \lambda_2 \bar{\vect{r}} \\
     &= \frac{r_0 B-r_1 R_d}{r_0 r_2 -r_1^2}\vect{1}+\frac{r_2 R_d - r_1 B}{r_0 r_2 -r_1^2}\bar{\vect{r}} + \lambda_1 \vect{1} +\lambda_2 \bar{\vect{r}}\ .
     \label{KKT:in:1}
 \end{align}
 \begin{align}
-    \vect{1}^T \vect{p}^{*} - B &= \frac{\vect{1}^T\matr{\Sigma}^{-1}\{(r_0 B-r_1 R_d)\vect{1}+(r_2 R_d - r_1 B)\bar{\vect{r}}\}}{r_0 r_2 - r_1^2}- B \\
-    & = \frac{\vect{1}^T\matr{\Sigma}^{-1}r_0 B \vect{1}-\vect{1}^T\matr{\Sigma}^{-1}r_1 R_d \vect{1}+\vect{1}^T\matr{\Sigma}^{-1}r_2 R_d \bar{\vect{r}}-\vect{1}^T \matr{\Sigma}^{-1} r_1 B \bar{\vect{r}}}{r_0 r_2 -r_1^2} - B \\
+    \vect{1}^T \vect{p}^{*} - B &= \frac{\vect{1}^T\boldsymbol{\Sigma}^{-1}\{(r_0 B-r_1 R_d)\vect{1}+(r_2 R_d - r_1 B)\bar{\vect{r}}\}}{r_0 r_2 - r_1^2}- B \\
+    & = \frac{\vect{1}^T\boldsymbol{\Sigma}^{-1}r_0 B \vect{1}-\vect{1}^T\boldsymbol{\Sigma}^{-1}r_1 R_d \vect{1}+\vect{1}^T\boldsymbol{\Sigma}^{-1}r_2 R_d \bar{\vect{r}}-\vect{1}^T \boldsymbol{\Sigma}^{-1} r_1 B \bar{\vect{r}}}{r_0 r_2 -r_1^2} - B \\
     & = \frac{r_2 r_0 B - r_2 r_1 R_d + r_1 r_2 R_d -r_1^2 B}{r_0 r_2 -r_1^2} - B \\
     & = B - B \\
     & = 0
     \label{KKT:in:2}
 \end{align}
 \begin{align}
-    \bar{\vect{r}}^T \vect{p}^{*} -R_d &= \frac{\bar{\vect{r}}^T\matr{\Sigma}^{-1}\{(r_0 B-r_1 R_d)\vect{1}+(r_2 R_d - r_1 B)\bar{\vect{r}}\}}{r_0 r_2 - r_1^2}- R_d \\
-    &= \frac{\bar{\vect{r}}^T\matr{\Sigma}^{-1}r_0 B \vect{1}-\bar{\vect{r}}^T\matr{\Sigma}^{-1}r_1 R_d \vect{1}+\bar{\vect{r}}^T\matr{\Sigma}^{-1}r_2 R_d \bar{\vect{r}}-\bar{\vect{r}}^T \matr{\Sigma}^{-1} r_1 B \bar{\vect{r}}}{r_0 r_2 -r_1^2} - R_d \ .
+    \bar{\vect{r}}^T \vect{p}^{*} -R_d &= \frac{\bar{\vect{r}}^T\boldsymbol{\Sigma}^{-1}\{(r_0 B-r_1 R_d)\vect{1}+(r_2 R_d - r_1 B)\bar{\vect{r}}\}}{r_0 r_2 - r_1^2}- R_d \\
+    &= \frac{\bar{\vect{r}}^T\boldsymbol{\Sigma}^{-1}r_0 B \vect{1}-\bar{\vect{r}}^T\boldsymbol{\Sigma}^{-1}r_1 R_d \vect{1}+\bar{\vect{r}}^T\boldsymbol{\Sigma}^{-1}r_2 R_d \bar{\vect{r}}-\bar{\vect{r}}^T \boldsymbol{\Sigma}^{-1} r_1 B \bar{\vect{r}}}{r_0 r_2 -r_1^2} - R_d \ .
     \label{KKT:in:3:half}
 \end{align}
-Here we first calculate $\bar{\vect{r}}^T \matr{\Sigma}^{-1} \vect{1}$,
+Here we first calculate $\bar{\vect{r}}^T \boldsymbol{\Sigma}^{-1} \vect{1}$,
 \begin{align}
-    (\bar{\vect{r}}^T \matr{\Sigma}^{-1} \vect{1})^T = (\matr{\Sigma}^{-1} \vect{1})^T \bar{\vect{r}} = \vect{1} \matr{\Sigma}^{-1} \bar{\vect{r}} = r_1 \ .
+    (\bar{\vect{r}}^T \boldsymbol{\Sigma}^{-1} \vect{1})^T = (\boldsymbol{\Sigma}^{-1} \vect{1})^T \bar{\vect{r}} = \vect{1} \boldsymbol{\Sigma}^{-1} \bar{\vect{r}} = r_1 \ .
     \label{KKT:in:3:com}
 \end{align}
 Combing (\ref{KKT:in:3:half}) and (\ref{KKT:in:3:com}), we obtain
@@ -126,7 +126,7 @@ From the simplified conditions given in the specfication and calculations based 
     r_0 = \bar{r}_1^2+1\ ,
     r_1 = \bar{r}_1 + 1\ , 
     r_2 = 2\ ,
-    \matr{\Sigma} = \matr{\Sigma}^{-1} =
+    \boldsymbol{\Sigma} = \boldsymbol{\Sigma}^{-1} =
     \begin{pmatrix}
         1 & 0 \\
         0 & 1
@@ -136,7 +136,7 @@ From the simplified conditions given in the specfication and calculations based 
 \noindent
 Plug the above additional conditions into the given $\vect{p}^{*}$ given in subsection (a), we get
 \begin{align}
-    \vect{p}^{*} &= \frac{\matr{\Sigma}^{-1}\{[(\bar{r}_1^2+1)B-(\bar{r}_1+1)R_d]\vect{1}+[2R_d - (\bar{r}_1 + 1)B]\bar{\vect{r}}\}}{2\bar{r}_1^2 + 2 - (\bar{r}_1+1)^2} \\
+    \vect{p}^{*} &= \frac{\boldsymbol{\Sigma}^{-1}\{[(\bar{r}_1^2+1)B-(\bar{r}_1+1)R_d]\vect{1}+[2R_d - (\bar{r}_1 + 1)B]\bar{\vect{r}}\}}{2\bar{r}_1^2 + 2 - (\bar{r}_1+1)^2} \\
     &= \frac{1}{\bar{r}_1 - 1} \cdot
     \begin{pmatrix}
         R_d - B \\
@@ -156,9 +156,9 @@ By observing (\ref{optimal:p}), we can conclude that
 \end{enumerate}
 
 \section{Task 2}
-The mixed integer question formed is
+The mixed integer program formed is
 \begin{gather}
-    \min_{\vect{x}\in\mathbb{R}^n ,\  \vect{y}\in \mathbb{Z}^n} \quad (\vect{x}+\boldsymbol{\omega})^T \matr{\Sigma} (\vect{x}+\boldsymbol{\omega}) \\
+    \min_{\vect{x}\in\mathbb{R}^n ,\  \vect{y}\in \mathbb{Z}^n} \quad (\vect{x}+\boldsymbol{\omega})^T \boldsymbol{\Sigma} (\vect{x}+\boldsymbol{\omega}) \\
     \label{mix:integer}
     \begin{aligned}
     \textup{s.t.} \quad \sum_{i=1}^{n} (x_i+\omega_i)\bar{r}_i \geq R_d\\
@@ -167,6 +167,110 @@ The mixed integer question formed is
                 x_i \geq -\omega_i,\ i = 1,\cdots,n\\
                 y_i \in \{0,1\},\ i = 1,\cdots,n
 \end{aligned}
+\end{gather}
+\section{Task 3}
+\subsection{Subquestion (a)}
+We first define a new vect $\vect{x'}$ as
+\begin{align*}
+    \vect{x'} = 
+    \begin{pmatrix}
+        t \\
+        \vect{x}
+    \end{pmatrix}\ , 
+\end{align*}
+where $\vect{x} \in \mathbb{R}^n$, $t \in \mathbb{R}$.
+
+\noindent
+The nonlinear program formed is 
+\begin{gather}
+    \min_{\vect{x'} \in \mathbb{R}^{n+1}} \quad
+    \begin{pmatrix}
+        1 \\
+        0 \\
+        \vdots \\
+        0
+    \end{pmatrix}^T
+    \cdot \vect{x'}\\
+\begin{aligned}
+    \textup{s.t.} \quad \sum_{i=1}^{n} (x_i + \omega_i)\bar{r}_i \geq R_d \\
+                        \sum_{i=1}^{n} (x_i + a x_i^2) \leq B \\
+                        t \geq \sqrt{(\vect{x}+\boldsymbol{\omega})^T \boldsymbol{\Sigma} (\vect{x}+\boldsymbol{\omega})} \\
+                        -M \leq x'_i \leq M,\ i=2,\cdots,n+1 \\
+                        x'_i \geq - \omega_i - 1,\ i=2,\cdots,n+1
+\end{aligned}
+\label{nonlinear:constraint}
+\end{gather}
+\subsection{Subquestion (b)}
+To write the nonlinear program as an SOCP, we need to modify the constraints in (\ref{nonlinear:constraint}) as
+\begin{align}
+    \sum_{i=1}^{n} (x_i + \omega_i)\bar{r}_i \geq R_d \implies \left \Vert 0 \vect{x'} + 
+    \begin{pmatrix}
+        R_d\\
+        0\\
+        \vdots\\
+        0
+    \end{pmatrix} \right \Vert \leq
+    \begin{pmatrix}
+        0\\
+        \bar{\vect{r}}
+    \end{pmatrix}^T \vect{x'} + \bar{\vect{r}}^T \boldsymbol{\omega}
+\end{align}
+\begin{align}
+    \sum_{i=1}^{n} (x_i + a x_i^2) \leq B &\implies \sum_{i=1}^{n} \left(x_i + a x_i^2+\frac{1}{4a}\right) \leq B+\frac{n}{4a} \\
+    &\implies \left \Vert \sqrt{a} \vect{x} + \frac{1}{2\sqrt{a}} \vect{1}\right \Vert \leq \sqrt{B+\frac{n}{4a}}
+\end{align}
+\begin{align}
+    t \geq \sqrt{(\vect{x}+\boldsymbol{\omega})^T \boldsymbol{\Sigma} (\vect{x}+\boldsymbol{\omega})} &\implies \left \Vert \boldsymbol{\Sigma}^{\frac{1}{2}} \vect{x} + \boldsymbol{\Sigma}^{\frac{1}{2}}\boldsymbol{\omega}\right \Vert \leq t \\
+    &\implies \left \Vert
+    \begin{pmatrix}
+        0 & \\
+        \vdots & \boldsymbol{\Sigma}^{\frac{1}{2}}\\
+        0 & 
+    \end{pmatrix} \vect{x'} + \boldsymbol{\Sigma}^{\frac{1}{2}} \boldsymbol{\omega} \right \Vert \leq
+    \begin{pmatrix}
+        1 \\
+        0 \\
+        \vdots \\
+        0
+    \end{pmatrix}^T \vect{x'}
+\end{align}
+Thus, the formed SOCP is 
+\begin{gather}
+    \min_{\vect{x'} \in \mathbb{R}^{n+1}} \quad \begin{pmatrix}
+        1 \\
+        0 \\
+        \vdots \\
+        0
+    \end{pmatrix}^T
+    \cdot \vect{x'}\\
+    \begin{aligned}
+    \textup{s.t.} \quad  \left \Vert 0 \vect{x'} + 
+    \begin{pmatrix}
+        R_d\\
+        0\\
+        \vdots\\
+        0
+    \end{pmatrix} \right \Vert \leq
+    \begin{pmatrix}
+        0\\
+        \bar{\vect{r}}
+    \end{pmatrix}^T \vect{x'} + \bar{\vect{r}}^T \boldsymbol{\omega}\\
+    \left \Vert \sqrt{a} \vect{x} + \frac{1}{2\sqrt{a}} \vect{1}\right \Vert \leq \sqrt{B+\frac{n}{4a}}\\
+    \left \Vert
+    \begin{pmatrix}
+        0 & \\
+        \vdots & \boldsymbol{\Sigma}^{\frac{1}{2}}\\
+        0 & 
+    \end{pmatrix} \vect{x'} + \boldsymbol{\Sigma}^{\frac{1}{2}} \boldsymbol{\omega} \right \Vert \leq
+    \begin{pmatrix}
+        1 \\
+        0 \\
+        \vdots \\
+        0
+    \end{pmatrix}^T \vect{x'}\\
+    -M \leq x'_i \leq M,\ i=2,\cdots,n+1 \\
+    x'_i \geq - \omega_i - 1,\ i=2,\cdots,n+1
+    \end{aligned}
 \end{gather}
 % It is a good habit to organize your reference in a bibliography (.bib) file. 
 \bibliography{estr_bib}
