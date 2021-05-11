@@ -74,47 +74,43 @@ Solving the KKT condition, we have
 \end{align}
 
 \noindent
-From the task specfication, we know that the optimal $\vect{p}^{*}$ is given as
-\begin{align}
-    \vect{p}^{*} = \frac{\boldsymbol{\Sigma}^{-1}\{(r_0 B-r_1 R_d)\vect{1}+(r_2 R_d- r_1 B)\bar{\vect{r}}\}}{r_0 r_2 - r_1^2} \ ,
-    \label{p:optimal}
-\end{align}
-where $r_0 = \bar{\vect{r}}^T \boldsymbol{\Sigma}^{-1} \bar{\vect{r}}$, $r_1 = \vect{1}^T \boldsymbol{\Sigma}^{-1} \bar{\vect{r}}$, $r_2 = \vect{1}^T \boldsymbol{\Sigma}^{-1} \vect{1}$.
 
-\noindent
-By plugging (\ref{p:optimal}) into the three equations in (\ref{KKT:1}), we get
+From (\ref{KKT:1}), we can derive the optimal solution $\vect{p}^{*}$ as:
 \begin{align}
-    \boldsymbol{\Sigma} \vect{p}^{*} +\lambda_1 \vect{1} + \lambda_2 \bar{\vect{r}}&= \frac{\boldsymbol{\Sigma}\boldsymbol{\Sigma}^{-1}\{(r_0 B - r_1 R_d)\vect{1}+(r_2 R_d - r_1 B)\bar{\vect{r}}\}}{r_0 r_2 -r_1^2} + \lambda_1 \vect{1} + \lambda_2 \bar{\vect{r}} \\
-    &= \frac{r_0 B-r_1 R_d}{r_0 r_2 -r_1^2}\vect{1}+\frac{r_2 R_d - r_1 B}{r_0 r_2 -r_1^2}\bar{\vect{r}} + \lambda_1 \vect{1} +\lambda_2 \bar{\vect{r}}\ .
-    \label{KKT:in:1}
-\end{align}
+    \begin{cases}
+        \boldsymbol{p^{*}} = \boldsymbol{\Sigma}^{-1} \cdot (-\lambda_{1}^{*} \cdot \boldsymbol{1} - \lambda_{2}^{*}\cdot \boldsymbol{\bar{r}}) \\
+        \lambda_{1}^{*} \cdot (\boldsymbol{1}^{T} \boldsymbol{\Sigma}^{-1} \boldsymbol{1}) + \lambda_{2}^{*} \cdot (\boldsymbol{1}^{T} \boldsymbol{\Sigma}^{-1} \boldsymbol{\bar{r}})=-B \\
+        \lambda_{1}^{*} \cdot (\boldsymbol{\bar{r}}^{T} \boldsymbol{\Sigma}^{-1} \boldsymbol{1}) + \lambda_{2}^{*} \cdot (\boldsymbol{\bar{r}}^{T} \boldsymbol{\Sigma}^{-1} \boldsymbol{\bar{r}}) =-R_{d}
+    \end{cases}
+    \label{KKT:opt}
+\end{align} 
+Let
 \begin{align}
-    \vect{1}^T \vect{p}^{*} - B &= \frac{\vect{1}^T\boldsymbol{\Sigma}^{-1}\{(r_0 B-r_1 R_d)\vect{1}+(r_2 R_d - r_1 B)\bar{\vect{r}}\}}{r_0 r_2 - r_1^2}- B \\
-    & = \frac{\vect{1}^T\boldsymbol{\Sigma}^{-1}r_0 B \vect{1}-\vect{1}^T\boldsymbol{\Sigma}^{-1}r_1 R_d \vect{1}+\vect{1}^T\boldsymbol{\Sigma}^{-1}r_2 R_d \bar{\vect{r}}-\vect{1}^T \boldsymbol{\Sigma}^{-1} r_1 B \bar{\vect{r}}}{r_0 r_2 -r_1^2} - B \\
-    & = \frac{r_2 r_0 B - r_2 r_1 R_d + r_1 r_2 R_d -r_1^2 B}{r_0 r_2 -r_1^2} - B \\
-    & = B - B \\
-    & = 0
-    \label{KKT:in:2}
+    r_{0}=\boldsymbol{\bar{r}}^{T} \boldsymbol{\Sigma}^{-1} \boldsymbol{\bar{r}},~
+    r_{1}=\boldsymbol{1}^{T} \boldsymbol{\Sigma}^{-1} \boldsymbol{\bar{r}},~
+    r_{2}=\boldsymbol{1}^{T} \boldsymbol{\Sigma}^{-1} \boldsymbol{1}
+    \label{R}
 \end{align}
+By plugging (\ref{R}) into (\ref{KKT:opt}), we obtain
 \begin{align}
-    \bar{\vect{r}}^T \vect{p}^{*} -R_d &= \frac{\bar{\vect{r}}^T\boldsymbol{\Sigma}^{-1}\{(r_0 B-r_1 R_d)\vect{1}+(r_2 R_d - r_1 B)\bar{\vect{r}}\}}{r_0 r_2 - r_1^2}- R_d \\
-    &= \frac{\bar{\vect{r}}^T\boldsymbol{\Sigma}^{-1}r_0 B \vect{1}-\bar{\vect{r}}^T\boldsymbol{\Sigma}^{-1}r_1 R_d \vect{1}+\bar{\vect{r}}^T\boldsymbol{\Sigma}^{-1}r_2 R_d \bar{\vect{r}}-\bar{\vect{r}}^T \boldsymbol{\Sigma}^{-1} r_1 B \bar{\vect{r}}}{r_0 r_2 -r_1^2} - R_d \ .
-    \label{KKT:in:3:half}
+    \begin{cases}
+        \lambda_{1}^{*} \cdot r_{2} + \lambda_{2}^{*} \cdot r_{1}=-B \\
+        \lambda_{1}^{*} \cdot r_{1} + \lambda_{2}^{*} \cdot r_{0}=-R_{d}
+    \end{cases}
+    \label{KKT:opt:2}
 \end{align}
-Here we first calculate $\bar{\vect{r}}^T \boldsymbol{\Sigma}^{-1} \vect{1}$,
+Solving the equations in (\ref{KKT:opt:2}), we get  
 \begin{align}
-    (\bar{\vect{r}}^T \boldsymbol{\Sigma}^{-1} \vect{1})^T = (\boldsymbol{\Sigma}^{-1} \vect{1})^T \bar{\vect{r}} = \vect{1} \boldsymbol{\Sigma}^{-1} \bar{\vect{r}} = r_1 \ .
-    \label{KKT:in:3:com}
+    \begin{cases}
+        \lambda_1^* = \frac{r_1 R_d- r_0 B}{r_0 r_2 -r_1^2} \\
+        \lambda_2^* = \frac{r_1 B - r_2 R_d}{r_0 r_2 -r_1^2}
+    \end{cases}
 \end{align}
-Combing (\ref{KKT:in:3:half}) and (\ref{KKT:in:3:com}), we obtain
+Thus,
 \begin{align}
-    \bar{\vect{r}}^T \vect{p}^{*} -R_d &= \frac{r_1 r_0 B - r_1^2 R_d + r_0 r_2 R_d - r_0 r_1 B}{r_0 r_2 - r_1^2} - R_d \\
-    &= R_d - R_d \\ 
-    &= 0
-    \label{KKT:in:3}
+    \vect{p}^* = \boldsymbol{\Sigma}^{-1} \cdot (-\lambda_{1}^{*} \cdot \boldsymbol{1} - \lambda_{2}^{*}\cdot \boldsymbol{\bar{r}}) =
+    \frac{\boldsymbol{\Sigma}^{-1} \cdot \big \{  (r_{0}B-r_{1}R_{d})\boldsymbol{1} + (r_{2}R_{d}-r_{1}B)\boldsymbol{\bar{r}}   \big \}}{r_{0}r_{2}-r_{1}^{2}}
 \end{align}
-\noindent
-From (\ref{KKT:in:1}), (\ref{KKT:in:2}) and (\ref{KKT:in:3}), by choosing $\lambda_1 = \frac{r_1 R_d- r_0 B}{r_0 r_2 -r_1^2}$, $\lambda_2 = \frac{r_1 B - r_2 R_d}{r_0 r_2 -r_1^2}$, all three equations equal to $0$ and $\vect{p}^{*}$ is proven to be a valid optimal solution for (1.1).
 \subsection{Subquestion (b)}
 From the simplified conditions given in the specfication and calculations based on the additional conditions, we have 
 \begin{align*}
