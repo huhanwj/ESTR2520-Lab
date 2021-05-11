@@ -42,12 +42,16 @@
 \maketitle
 
 
-\section{Introduction}
-
-This is where the content of your paper goes.
-
-\section{Task 1}
-\subsection{Subquestion (a)}
+\section{Background and Introduction}
+Brief introduce the problem.
+\begin{itemize}
+    \item Explain the goal of portfolio design
+    \item Discuss the role of optimization methods in portfolio design
+\end{itemize}
+\section{Model and Theory}
+\subsection{Task 1}
+Briefly discuss the formation of (1.1)
+\subsubsection{Subquestion (a)}
 Derivation of the KKT conditions for the (simplified) Markowitz's mean-variance Portfolio Optimization problem stated in formula (1.1) in project specfication is:
 \begin{align}
     L(p,\boldsymbol{\lambda}) = \frac{1}{2}\vect{p}^T\boldsymbol{\Sigma} \vect{p} + \lambda_{1} (\vect{1}^T \vect{p}-B) +\lambda_{2} (\bar{\vect{r}}^T \vect{p}-R_{d})\ ,
@@ -111,7 +115,7 @@ Thus,
     \vect{p}^* = \boldsymbol{\Sigma}^{-1} \cdot (-\lambda_{1}^{*} \cdot \boldsymbol{1} - \lambda_{2}^{*}\cdot \boldsymbol{\bar{r}}) =
     \frac{\boldsymbol{\Sigma}^{-1} \cdot \big \{  (r_{0}B-r_{1}R_{d})\boldsymbol{1} + (r_{2}R_{d}-r_{1}B)\boldsymbol{\bar{r}}   \big \}}{r_{0}r_{2}-r_{1}^{2}}
 \end{align}
-\subsection{Subquestion (b)}
+\subsubsection{Subquestion (b)}
 From the simplified conditions given in the specfication and calculations based on the additional conditions, we have 
 \begin{align*}
     \bar{\vect{r}} =
@@ -151,7 +155,9 @@ By observing (\ref{optimal:p}), we can conclude that
     \item If $R_d$ increases, $p_1^{*}$ will increase, $p_2^{*}$ will decrease.
 \end{enumerate}
 
-\section{Task 2}
+\subsection{Task 2}
+Describe the problem
+
 The mixed integer program formed is
 \begin{gather}
     \min_{\vect{x}\in\mathbb{R}^n ,\  \vect{y}\in \mathbb{Z}^n} \quad (\vect{x}+\boldsymbol{\omega})^T \boldsymbol{\Sigma} (\vect{x}+\boldsymbol{\omega}) \\
@@ -164,8 +170,9 @@ The mixed integer program formed is
                 y_i \in \{0,1\},\ i = 1,\cdots,n
 \end{aligned}
 \end{gather}
-\section{Task 3}
-\subsection{Subquestion (a)}
+\subsection{Task 3}
+Intro to task 3
+\subsubsection{Subquestion (a)}
 We first define a new vector $\vect{x'}$ as
 \begin{align*}
     \vect{x'} = 
@@ -196,7 +203,7 @@ The nonlinear program formed is
 \end{aligned}
 \label{nonlinear:constraint}
 \end{gather}
-\subsection{Subquestion (b)}
+\subsubsection{Subquestion (b)}
 To write the nonlinear program as an SOCP, we need to modify the constraints in (\ref{nonlinear:constraint}) as
 \begin{align}
     \sum_{i=1}^{n} (x_i + \omega_i)\bar{r}_i \geq R_d \implies \left \Vert 0 \vect{x'} + 
@@ -279,6 +286,22 @@ Thus, the formed SOCP is
     x'_i \geq - \omega_{i - 1},\ i=2,\cdots,n+1
     \end{aligned}
 \end{gather}
+\section{Experiments}
+\subsection{Task 4}
+Describe the dataset
+\subsection{Task 5}
+\begin{itemize}
+    \item Comment on the portfolio found
+    \item Comment on the trends of the returns $\bar{r}_i$ and variance of different stocks
+    \item Try different $R_d$ and $B$, comment on their effects.
+\end{itemize}
+\subsection{Task 6}
+Compare three approaches: KKT, MI-NIP, SOCP. Comment on differences between solutions obtained.
+\subsection{Task 7}
+Compare solutions found in Task 5 and 6 under given parameters. Comment on the differences of the results.
+\section{Competitive Task}
+
+\section{Conclusion}
 % It is a good habit to organize your reference in a bibliography (.bib) file. 
 \bibliography{estr_bib}
  
