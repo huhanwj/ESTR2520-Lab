@@ -87,6 +87,7 @@ for lambda = 1:10:70000
         x_custom_pp = copy( x_custom )
         x_custom_pp[ abs.(x_custom_pp) .< delta ] .= 0;
         sharpe_PPGD = sharpe_ratio( "./ftec_project_files/", x_custom_pp, ones(n), 2 )
+        print("openfile!")
         open(outfile, "w") do f
             for da in sharpe_PPGD
               println(f, da)
